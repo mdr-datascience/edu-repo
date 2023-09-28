@@ -51,3 +51,7 @@ print(next(myiter))
 print(next(myiter))
 print(next(myiter))
 print(next(myiter))
+
+def myfunc(val1,val2):
+     ret_val = val1 ** val2
+     return(ret_val)
