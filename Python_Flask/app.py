@@ -1,40 +1,30 @@
+# Import libraries
 from flask import Flask, render_template_string
-import matplotlib.pyplot as plt
-import io
-import base64
 
+# Create app
 app = Flask(__name__)
 
+# Define homepage route
 @app.route('/')
 def home():
-    # Create a simple plot using matplotlib
-    plt.figure()
-    plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
-    plt.title('Simple Plot')
-    plt.xlabel('X-axis')
-    plt.ylabel('Y-axis')
+    # Hello World string
+    welcome_string = "Hello World!"
 
-    # Save the plot to a BytesIO object and enconde to base64
-    img = io.BytesIO()
-    plt.savefig(img, format='png')
-    img.seek(0)
-    plot_url = base64.b64encode(img.getvalue()).decode()
-
-    # Render the plot in an HTML template
+    # Render an HTML template
     html = '''
     <!doctype html>
     <html>
     <head>
-        <title>Matplotlib Plot</title>
+        <title>Welcome Page</title>
     </head>
     <body>
-        <h1>Matplotlib Plot</h1>
-        <img src="data:image/png;base64,{{ plot_url }}">
+        <h1>{{ wstring }}</h1>
     </body>
     </html>
     '''
     
-    return render_template_string(html, plot_url=plot_url)
+    return render_template_string(html, wstring=welcome_string)
 
+# Run app in debug mode
 if __name__ == '__main__':
     app.run(debug=True)
